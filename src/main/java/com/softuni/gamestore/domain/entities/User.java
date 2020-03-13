@@ -44,7 +44,7 @@ public class User extends BaseEntity{
         this.role = role;
     }
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     public String getEmail() {
         return email;
     }
