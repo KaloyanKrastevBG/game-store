@@ -4,5 +4,5 @@ import com.softuni.gamestore.domain.dtos.GameAddDto;
 
 public interface GameService {
 
-    void addGame(GameAddDto gameAddDto );
+    void addGame(GameAddDto gameAddDto);
 }

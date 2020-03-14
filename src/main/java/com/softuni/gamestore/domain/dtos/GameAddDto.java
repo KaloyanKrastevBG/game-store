@@ -3,6 +3,10 @@ package com.softuni.gamestore.domain.dtos;
 import com.softuni.gamestore.domain.entities.Order;
 import com.softuni.gamestore.domain.entities.User;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
@@ -32,6 +36,8 @@ public class GameAddDto {
         this.releaseDate = releaseDate;
     }
 
+    @Pattern(regexp = "^[A-Z].+", message = "Title is not valid")
+    @Size(min = 3, max = 100, message = "Title size must be between 3 and 100 symbols")
     public String getTitle() {
         return title;
     }
@@ -40,6 +46,7 @@ public class GameAddDto {
         this.title = title;
     }
 
+    @DecimalMin(value = "0", message = "Price should be positive")
     public BigDecimal getPrice() {
         return price;
     }
@@ -48,6 +55,7 @@ public class GameAddDto {
         this.price = price;
     }
 
+    @Min(value = 0, message = "Size should be positive")
     public double getSize() {
         return size;
     }
@@ -56,6 +64,7 @@ public class GameAddDto {
         this.size = size;
     }
 
+    @Size(min = 11, max = 11, message = "Trailer is not valid")
     public String getTrailer() {
         return trailer;
     }
@@ -64,6 +73,7 @@ public class GameAddDto {
         this.trailer = trailer;
     }
 
+    @Pattern(regexp = "^http:\\/\\/.+|https:\\/\\/.+", message = "Image is not valid")
     public String getImage() {
         return image;
     }
@@ -72,6 +82,7 @@ public class GameAddDto {
         this.image = image;
     }
 
+    @Size(min = 20, message = "Description is not valid")
     public String getDescription() {
         return description;
     }

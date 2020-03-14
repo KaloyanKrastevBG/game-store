@@ -3,6 +3,7 @@ package com.softuni.gamestore.controllers;
 import com.softuni.gamestore.domain.dtos.GameAddDto;
 import com.softuni.gamestore.domain.dtos.UserLoginDto;
 import com.softuni.gamestore.domain.dtos.UserRegisterDto;
+import com.softuni.gamestore.services.GameService;
 import com.softuni.gamestore.services.UserService;
 import com.softuni.gamestore.utils.ValidationUtil;
 import org.modelmapper.ModelMapper;
@@ -23,14 +24,16 @@ public class AppController implements CommandLineRunner {
     private final ModelMapper modelMapper;
     private final ValidationUtil validationUtil;
     private final UserService userService;
+    private final GameService gameService;
 
 
     @Autowired
-    public AppController(BufferedReader bufferedReader, ModelMapper modelMapper, ValidationUtil validationUtil, UserService userService) {
+    public AppController(BufferedReader bufferedReader, ModelMapper modelMapper, ValidationUtil validationUtil, UserService userService, GameService gameService) {
         this.bufferedReader = bufferedReader;
         this.modelMapper = modelMapper;
         this.validationUtil = validationUtil;
         this.userService = userService;
+        this.gameService = gameService;
     }
 
 
@@ -82,7 +85,19 @@ public class AppController implements CommandLineRunner {
 
                     );
 
-                    System.out.println();
+                    if (this.validationUtil.isValid(gameAddDto)){
+                        this.gameService.addGame(gameAddDto);
+
+
+                    } else {
+                        this.validationUtil
+                                .getViolation(gameAddDto)
+                                .stream()
+                                .map(ConstraintViolation::getMessage)
+                                .forEach(System.out::println);
+
+                    }
+
                     break;
 
             }

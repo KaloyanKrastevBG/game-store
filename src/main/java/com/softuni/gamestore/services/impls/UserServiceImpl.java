@@ -61,4 +61,9 @@ public class UserServiceImpl implements UserService {
             System.out.printf("User %s successfully logged out%n", name);
         }
     }
+
+    @Override
+    public boolean isLoggedUserIsAdmin() {
+        return this.userDto.getRole().equals(Role.ADMIN);
+    }
 }
