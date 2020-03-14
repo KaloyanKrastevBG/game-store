@@ -22,7 +22,7 @@ public class Game extends BaseEntity {
     private String trailer;
     private Set<User> users;
     private Set<Order> orders;
-    private String facebook;
+
 
 
     @ManyToMany

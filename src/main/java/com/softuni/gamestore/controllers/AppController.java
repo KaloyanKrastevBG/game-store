@@ -1,5 +1,6 @@
 package com.softuni.gamestore.controllers;
 
+import com.softuni.gamestore.domain.dtos.GameAddDto;
 import com.softuni.gamestore.domain.dtos.UserLoginDto;
 import com.softuni.gamestore.domain.dtos.UserRegisterDto;
 import com.softuni.gamestore.services.UserService;
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintViolation;
 import java.io.BufferedReader;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Component
 public class AppController implements CommandLineRunner {
@@ -46,8 +50,8 @@ public class AppController implements CommandLineRunner {
                     UserRegisterDto userRegisterDto =
                             new UserRegisterDto(input[1], input[2], input[4]);
 
-                    if (this.validationUtil.isValid(userRegisterDto)){
-                            this.userService.registerUser(userRegisterDto);
+                    if (this.validationUtil.isValid(userRegisterDto)) {
+                        this.userService.registerUser(userRegisterDto);
                         System.out.printf("User %s is registered successfully!%n", input[4]);
 
                     } else {
@@ -68,9 +72,18 @@ public class AppController implements CommandLineRunner {
 
                 case "Logout":
                     this.userService.logout();
-
                     break;
 
+                case "AddGame":
+                    GameAddDto gameAddDto = new GameAddDto(
+                            input[1], new BigDecimal(input[2]),
+                            Double.parseDouble(input[3]), input[4],
+                            input[5], input[6], LocalDate.parse(input[7], DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+
+                    );
+
+                    System.out.println();
+                    break;
 
             }
 
