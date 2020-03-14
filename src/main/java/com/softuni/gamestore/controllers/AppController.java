@@ -1,5 +1,6 @@
 package com.softuni.gamestore.controllers;
 
+import com.softuni.gamestore.domain.dtos.EditGameDto;
 import com.softuni.gamestore.domain.dtos.GameAddDto;
 import com.softuni.gamestore.domain.dtos.UserLoginDto;
 import com.softuni.gamestore.domain.dtos.UserRegisterDto;
@@ -101,7 +102,16 @@ public class AppController implements CommandLineRunner {
                     break;
 
                 case "EditGame":
-                    // TO DO
+
+                    int id = Integer.parseInt(input[1]);
+                    String[] priceParam = input[2].split("=");
+                    String[] sizeParam = input[3].split("=");
+
+                    EditGameDto editGameDto = new EditGameDto(id, new BigDecimal(priceParam[1]),
+                            Double.parseDouble(sizeParam[1]));
+
+                    this.gameService.editGame(editGameDto);
+
                     break;
 
             }
