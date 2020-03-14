@@ -66,4 +66,6 @@ public class UserServiceImpl implements UserService {
     public boolean isLoggedUserIsAdmin() {
         return this.userDto.getRole().equals(Role.ADMIN);
     }
+
+
 }

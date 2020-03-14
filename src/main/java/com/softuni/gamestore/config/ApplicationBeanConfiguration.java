@@ -11,7 +11,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 @Configuration
-public class ApplicationBeanConfirguration {
+public class ApplicationBeanConfiguration {
 
     @Bean
     public ValidationUtil validationUtil(){

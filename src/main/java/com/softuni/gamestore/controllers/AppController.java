@@ -100,6 +100,10 @@ public class AppController implements CommandLineRunner {
 
                     break;
 
+                case "EditGame":
+                    // TO DO
+                    break;
+
             }
 
         }

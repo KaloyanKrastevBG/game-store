@@ -26,15 +26,21 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public void addGame(GameAddDto gameAddDto) {
-        if (!this.userService.isLoggedUserIsAdmin()){
-            System.out.println("User is not admin");
-            return;
+
+        try {
+            if (!this.userService.isLoggedUserIsAdmin()) {
+                System.out.println("User is not admin");
+                return;
+            }
+            Game game = this.modelMapper
+                    .map(gameAddDto, Game.class);
+
+            this.gameRepository.saveAndFlush(game);
+            System.out.printf("Added %s%n", game.getTitle());
+
+        } catch (Exception ex){
+            System.out.println("No user is logged in. Log in first!");
+
         }
-
-        Game game = this.modelMapper
-                .map(gameAddDto, Game.class);
-
-        this.gameRepository.saveAndFlush(game);
-        System.out.printf("Added %s%n", game.getTitle());
     }
 }
