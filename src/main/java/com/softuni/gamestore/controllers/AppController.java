@@ -1,5 +1,6 @@
 package com.softuni.gamestore.controllers;
 
+import com.softuni.gamestore.domain.dtos.UserLoginDto;
 import com.softuni.gamestore.domain.dtos.UserRegisterDto;
 import com.softuni.gamestore.services.UserService;
 import com.softuni.gamestore.utils.ValidationUtil;
@@ -38,7 +39,6 @@ public class AppController implements CommandLineRunner {
 
             switch (input[0]) {
                 case "RegisterUser":
-
                     if (!input[2].equals(input[3])) {
                         System.out.println("Passwords dont match");
                         break;
@@ -56,8 +56,14 @@ public class AppController implements CommandLineRunner {
                                 .stream()
                                 .map(ConstraintViolation::getMessage)
                                 .forEach(System.out::println);
-
                     }
+
+                    break;
+                case "LoginUser":
+                    UserLoginDto userLoginDto =
+                            new UserLoginDto(input[1], input[2]);
+
+                    this.userService.loginUser(userLoginDto);
 
                     break;
 

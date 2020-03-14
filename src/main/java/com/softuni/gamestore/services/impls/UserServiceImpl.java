@@ -1,5 +1,7 @@
 package com.softuni.gamestore.services.impls;
 
+import com.softuni.gamestore.domain.dtos.UserDto;
+import com.softuni.gamestore.domain.dtos.UserLoginDto;
 import com.softuni.gamestore.domain.dtos.UserRegisterDto;
 import com.softuni.gamestore.domain.entities.Role;
 import com.softuni.gamestore.domain.entities.User;
@@ -15,11 +17,13 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private UserDto userDto;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+
     }
 
     @Override
@@ -31,5 +35,19 @@ public class UserServiceImpl implements UserService {
 
         this.userRepository.saveAndFlush(user);
 
+    }
+
+    @Override
+    public void loginUser(UserLoginDto userLoginDto) {
+        User user = this.userRepository.findByEmail(userLoginDto.getEmail());
+
+        if (user == null){
+            System.out.println("Incorrect username / password");
+
+        } else {
+            this.userDto = this.modelMapper
+                    .map(user, UserDto.class);
+            System.out.printf("Successfully logged in %s%n", user.getFullName());
+        }
     }
 }

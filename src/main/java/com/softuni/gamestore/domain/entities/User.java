@@ -7,12 +7,12 @@ import java.util.Set;
 @Table(name = "users")
 public class User extends BaseEntity{
 
-    private String email;
     private String fullName;
+    private String email;
     private String password;
-    private Role role;
     private Set<Game> games;
     private Set<Order> orders;
+    private Role role;
 
 
     @OneToMany(mappedBy = "user", targetEntity = Order.class, cascade = CascadeType.ALL,
@@ -62,7 +62,7 @@ public class User extends BaseEntity{
         this.fullName = fullName;
     }
 
-    @Column(name = "password", unique = true)
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
