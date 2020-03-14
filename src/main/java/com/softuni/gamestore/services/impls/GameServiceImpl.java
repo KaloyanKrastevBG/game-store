@@ -73,5 +73,24 @@ public class GameServiceImpl implements GameService {
         }
     }
 
+    @Override
+    public void printTitleAndPriceofAllGames() {
+        this.gameRepository.findAll().forEach(g -> {
+            System.out.printf("%s %s%n", g.getTitle(), g.getPrice());
+        });
+    }
+
+    @Override
+    public void detailGame(String title) {
+        Game game = this.gameRepository.findByTitle(title);
+
+        System.out.printf("Title: %s%n" +
+                "Price: %s%n" +
+                "Description: %s%n" +
+                "Release date: %s%n",
+                game.getTitle(), game.getPrice(),
+                game.getDescription(), game.getReleaseDate());
+    }
+
 
 }

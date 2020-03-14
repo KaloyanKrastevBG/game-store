@@ -10,4 +10,8 @@ public interface GameService {
    void editGame(EditGameDto editGameDto);
 
    void deleteGame(long id);
+
+   void printTitleAndPriceofAllGames();
+
+   void detailGame(String title);
 }

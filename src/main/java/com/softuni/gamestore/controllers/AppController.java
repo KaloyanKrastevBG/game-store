@@ -125,6 +125,14 @@ public class AppController implements CommandLineRunner {
 
                     break;
 
+                case "AllGames":
+                    this.gameService.printTitleAndPriceofAllGames();
+                    break;
+
+                case "DetailGame":
+                    this.gameService.detailGame(input[1]);
+                    break;
+
 
             }
 
