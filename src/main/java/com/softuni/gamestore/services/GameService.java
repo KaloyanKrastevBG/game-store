@@ -8,4 +8,6 @@ public interface GameService {
     void addGame(GameAddDto gameAddDto);
 
    void editGame(EditGameDto editGameDto);
+
+   void deleteGame(long id);
 }

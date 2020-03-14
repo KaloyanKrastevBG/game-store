@@ -86,7 +86,7 @@ public class AppController implements CommandLineRunner {
 
                     );
 
-                    if (this.validationUtil.isValid(gameAddDto)){
+                    if (this.validationUtil.isValid(gameAddDto)) {
                         this.gameService.addGame(gameAddDto);
 
 
@@ -113,6 +113,18 @@ public class AppController implements CommandLineRunner {
                     this.gameService.editGame(editGameDto);
 
                     break;
+
+                case "DeleteGame":
+                    try {
+                        this.gameService.deleteGame(Long.parseLong(input[1]));
+
+                    } catch (Exception ex){
+                        System.out.println("No such game in GameRepo");
+                        System.out.printf("%s%n", ex.getMessage());
+                    }
+
+                    break;
+
 
             }
 

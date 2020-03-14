@@ -53,10 +53,24 @@ public class GameServiceImpl implements GameService {
         game.setPrice(editGameDto.getPrice());
         game.setSize(editGameDto.getSize());
 
-        this.gameRepository.save(game);
+        this.gameRepository.saveAndFlush(game);
         System.out.printf("Game %s successfully edited%n", game.getTitle());
 
 
+    }
+
+    @Override
+    public void deleteGame(long id) {
+
+        if (this.gameRepository.findById(id) != null) {
+            Game game = this.gameRepository.findById(id);
+            String name = game.getTitle();
+            this.gameRepository.deleteById(id);
+            System.out.printf("Game %s successfully deleted", name);
+
+        } else {
+            System.out.println("No such game in the Repo");
+        }
     }
 
 
