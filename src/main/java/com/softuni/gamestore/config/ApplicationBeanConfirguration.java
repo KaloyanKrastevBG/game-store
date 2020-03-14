@@ -3,6 +3,7 @@ package com.softuni.gamestore.config;
 
 import com.softuni.gamestore.utils.ValidationUtil;
 import com.softuni.gamestore.utils.ValidationUtilImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,5 +21,10 @@ public class ApplicationBeanConfirguration {
     @Bean
     public BufferedReader bufferedReader(){
         return new BufferedReader(new InputStreamReader(System.in));
+    }
+
+    @Bean
+    public ModelMapper modelMapper(){
+        return new ModelMapper();
     }
 }

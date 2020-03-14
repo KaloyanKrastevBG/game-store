@@ -71,7 +71,7 @@ public class User extends BaseEntity{
         this.password = password;
     }
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     public Role getRole() {
         return role;
     }
