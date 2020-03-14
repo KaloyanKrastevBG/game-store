@@ -50,4 +50,15 @@ public class UserServiceImpl implements UserService {
             System.out.printf("Successfully logged in %s%n", user.getFullName());
         }
     }
+
+    @Override
+    public void logout() {
+        if (this.userDto == null){
+            System.out.println("Cannot log out. No user was logged in.");
+        } else {
+            String name = this.userDto.getFullName();
+            this.userDto = null;
+            System.out.printf("User %s successfully logged out%n", name);
+        }
+    }
 }
